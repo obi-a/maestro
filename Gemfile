@@ -24,3 +24,4 @@ gem "excon"
 
 gem "rspec"
 gem "rack-test"
+gem "uptime_monitor"
