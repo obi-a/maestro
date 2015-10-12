@@ -23,3 +23,4 @@ gem "contracts"
 
 gem "rspec"
 gem "rack-test"
+gem "uptime_monitor"
