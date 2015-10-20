@@ -1,8 +1,8 @@
 #Maestro
 
-Easy web browser automation
-website transaction monitor
-Monitor website functionality and uptime with a real Browser
+* Easy web browser automation
+* website transaction monitor
+* Monitor website functionality and uptime with a real Browser
 
 ##What is Maestro
 Maestro = Ragios + Uptime_monitor plugin + firefox + Xvfb
@@ -28,7 +28,7 @@ Install the ragios-client rubygem:
 gem install ragios-client
 ```
 Using ragios-client to add a monitor
-```
+```ruby
 require "ragios-client"
 ragios = Ragios::Client.new
 
@@ -73,7 +73,7 @@ docker run -t -i --name my-ragios --link couchdb:couchdb -p 5041:5041 my-ragios
 
 ##Configure Ragios
 Before building the docker image you can add environment variables to the Dockerfile to configure Ragios. For example to use the gmail_notifier (so that Ragios will send you notifications via gmail), add the correct environment variables to the Dockerfile and build it. The dockerfile will look like this:
-```
+```bash
 FROM cloudgear/ruby:2.2-onbuild
 ENV RAGIOS_COUCHDB_ADDRESS couchdb
 ENV RAGIOS_BIND_ADDRESS tcp://0.0.0.0:5041
