@@ -5,7 +5,7 @@
 * Monitor website functionality and uptime with a real web browser
 
 ##What is Maestro
-Maestro = [Ragios](https://github.com/obi-a/ragios) + [Uptime_monitor plugin](https://github.com/obi-a/uptime_monitor) + [Firefox](https://en.wikipedia.org/wiki/Firefox) + [Xvfb](https://en.wikipedia.org/wiki/Xvfb)
+Maestro = [Ragios](https://github.com/obi-a/ragios) + [Uptime_monitor plugin](https://github.com/obi-a/uptime_monitor) + [Firefox](https://en.wikipedia.org/wiki/Firefox) + [Xvfb](https://en.wikipedia.org/wiki/Xvfb) + [Docker](https://en.wikipedia.org/wiki/Docker_(software))
 
 Maestro is a docker image with Ragios + Uptime_monitor plugin + firefox + Xvfb, all setup and already configured to run out of the box, dockerized and shipped in a container.
 
