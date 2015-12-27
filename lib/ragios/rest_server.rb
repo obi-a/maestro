@@ -172,6 +172,18 @@ class App < Sinatra::Base
     end
   end
 
+  post '/maestro/create*', :check => :valid_token? do
+    try_request do
+      generate_json( Ragios::Maestro::Api.create(params) )
+    end
+  end
+
+  post '/maestro/exists', :check => :valid_token?  do
+    try_request do
+      generate_json( Ragios::Maestro::Api.exists(params) )
+    end
+  end
+
   get '/admin/index' do
     check_logout
     content_type('text/html')

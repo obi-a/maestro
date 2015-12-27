@@ -1,0 +1,1 @@
+Ragios::Maestro::Api.init()
