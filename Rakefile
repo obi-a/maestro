@@ -31,6 +31,7 @@ task :test_ragios do
   sh 'rspec -fs spec/integration'
 end
 
+
 task :c => :console
 task :test_notifiers => :notifiers
 task :test_plugins => :plugins

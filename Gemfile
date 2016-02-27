@@ -24,4 +24,4 @@ gem "excon"
 
 gem "rspec"
 gem "rack-test"
-gem "uptime_monitor"
+gem "uptime_monitor", '~> 0.3.3'
