@@ -22,5 +22,6 @@ gem "eventmachine", '~> 1.0.4'
 gem "contracts"
 gem "excon"
 
-gem "rspec"
-gem "rack-test"
+gem "rspec", '~> 2.5.0'
+gem "rack-test", '~> 0.6.2'
+gem "uptime_monitor", '~> 0.4.0'
