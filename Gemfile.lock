@@ -69,9 +69,9 @@ GEM
     i18n (0.7.0)
     json (1.8.3)
     json_pure (1.8.3)
-    leanback (0.5.1)
+    leanback (0.5.2)
       activesupport
-      json_pure
+      json_pure (~> 1.8.3)
       rest-client
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
@@ -182,7 +182,7 @@ DEPENDENCIES
   gmail
   i18n
   json_pure
-  leanback (~> 0.5.1)
+  leanback (~> 0.5.2)
   pony
   pry
   puma (~> 2.10.1)
