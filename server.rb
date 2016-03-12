@@ -27,7 +27,7 @@
 #
 # The default is “development”.
 #
-environment 'production'
+#environment 'production'
 
 # Daemonize the server into the background. Highly suggest that
 # this be combined with “pidfile” and “stdout_redirect”.
@@ -39,19 +39,19 @@ environment 'production'
 
 # Store the pid of the server in the file at “path”.
 #
-pidfile 'tmp/pids/puma.pid'
+#pidfile 'tmp/pids/puma.pid'
 
 # Use “path” as the file to store the server info state. This is
 # used by “pumactl” to query and control the server.
 #
-state_path 'tmp/pids/puma.state'
+#state_path 'tmp/pids/puma.state'
 
 # Redirect STDOUT and STDERR to files specified. The 3rd parameter
 # (“append”) specifies whether the output is appended, the default is
 # “false”.
 #
-stdout_redirect 'log/stdout.log', 'log/stderr.log'
-stdout_redirect 'log/stdout.log', 'log/stderr.log', true
+#stdout_redirect 'log/stdout.log', 'log/stderr.log'
+#stdout_redirect 'log/stdout.log', 'log/stderr.log', true
 
 # Disable request logging.
 #
