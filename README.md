@@ -1,5 +1,7 @@
 #Maestro
 
+[![Build Status](https://travis-ci.org/obi-a/maestro.svg?branch=master)](https://travis-ci.org/obi-a/maestro)
+
 * Easy web browser automation
 * Website transaction monitor
 * Monitor website functionality and uptime with a real web browser
