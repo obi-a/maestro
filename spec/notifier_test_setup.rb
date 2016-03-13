@@ -47,7 +47,8 @@ module Ragios
         every: "5m",
         via: notifier,
         contact: ENV['RAGIOS_CONTACT'],
-        plugin: "failing_plugin"
+        plugin: "failing_plugin",
+        room: "Southmunn"
       }
 
       #test should fail and send a FAILED notification message
