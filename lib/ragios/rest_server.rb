@@ -172,6 +172,18 @@ class App < Sinatra::Base
     end
   end
 
+  post '/maestro/test', :check => :valid_token?  do
+    try_request do
+
+      monitor = {
+        url: params[:url],
+        browser: "firefox headless",
+        exists?: params[:source_code]
+      }
+      generate_json( Ragios::Maestro::Api.test(monitor) )
+    end
+  end
+
   get '/admin/index' do
     check_logout
     content_type('text/html')
