@@ -178,7 +178,8 @@ class App < Sinatra::Base
       monitor = {
         url: params[:url],
         browser: "firefox headless",
-        exists?: params[:source_code]
+        exists?: params[:source_code],
+        disable_screenshots: true
       }
       generate_json( Ragios::Maestro::Api.test(monitor) )
     end
