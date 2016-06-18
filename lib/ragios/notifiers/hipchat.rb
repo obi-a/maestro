@@ -13,10 +13,10 @@ module Ragios
     class Hipchat
 
       def initialize(monitor)
+         raise "A Room Name must be provided for the HipChat notifier in #{@monitor[:monitor]} monitor" unless @monitor[:room]
         @token = ENV['HIPCHAT_TOKEN']
         @monitor = monitor
         @connection = Excon.new(ENV['HIPCHAT_API_HOST'])
-        raise "A Room Name must be provided for the HipChat notifier in #{@monitor[:monitor]} monitor" if @monitor[:room].nil?
       end
 
       def failed(test_result)
