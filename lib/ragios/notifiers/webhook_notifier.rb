@@ -9,13 +9,11 @@ module Ragios
 
       def failed(test_result)
         message = result("failed", test_result)
-        puts message.inspect
-        #post(message)
+        post(message)
       end
       def resolved(test_result)
         message = result("resolved", test_result)
-        puts message.inspect
-        #post(message)
+        post(message)
       end
 
       def result(event, test_result)
