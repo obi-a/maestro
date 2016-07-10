@@ -49,7 +49,7 @@ GEM
     excon (0.48.0)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
-    ffi (1.9.10)
+    ffi (1.9.13)
     gmail (0.6.0)
       gmail_xoauth (>= 0.3.0)
       mail (>= 2.2.1)
@@ -68,10 +68,8 @@ GEM
     http_parser.rb (0.6.0)
     i18n (0.7.0)
     json (1.8.3)
-    json_pure (1.8.3)
-    leanback (0.5.2)
-      activesupport
-      json_pure (~> 1.8.3)
+    leanback (0.5.4)
+      multi_json
       rest-client
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
@@ -80,12 +78,11 @@ GEM
     method_source (0.8.2)
     mime-types (2.99.1)
     minitest (4.7.5)
-    multi_json (1.11.2)
+    multi_json (1.12.1)
     multipart-post (2.0.0)
     naught (1.1.0)
     netrc (0.11.0)
     oauth (0.5.1)
-    oj (2.14.6)
     polyglot (0.3.5)
     pony (1.11)
       mail (>= 2.0)
@@ -119,9 +116,8 @@ GEM
     rubyzip (1.2.0)
     rufus-scheduler (3.0.9)
       tzinfo
-    selenium-webdriver (2.52.0)
+    selenium-webdriver (2.53.4)
       childprocess (~> 0.5)
-      multi_json (~> 1.0)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
     simple_oauth (0.3.1)
@@ -155,18 +151,19 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.2)
-    uptime_monitor (0.5.0)
+    uptime_monitor (0.6.3)
       aws-s3
       headless (~> 1.0.2)
+      selenium-webdriver (~> 2.53.4)
       treetop
-      watir-webdriver
+      watir-webdriver (~> 0.9.1)
       watir-webdriver-performance (~> 0.2.4)
     uuidtools (2.1.5)
     watir-webdriver (0.9.1)
       selenium-webdriver (>= 2.46.2)
     watir-webdriver-performance (0.2.4)
       watir-webdriver
-    websocket (1.2.2)
+    websocket (1.2.3)
     xml-simple (1.1.5)
 
 PLATFORMS
@@ -181,9 +178,9 @@ DEPENDENCIES
   excon
   gmail
   i18n
-  leanback (= 0.5.2)
+  json
+  leanback (= 0.5.4)
   multi_json
-  oj
   pony
   pry
   puma (~> 2.10.1)
@@ -197,7 +194,7 @@ DEPENDENCIES
   sucker_punch (~> 1.0)
   thor
   twitter
-  uptime_monitor (~> 0.5.0)
+  uptime_monitor (~> 0.6.3)
   uuidtools
 
 BUNDLED WITH

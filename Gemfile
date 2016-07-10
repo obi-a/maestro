@@ -13,7 +13,7 @@ gem 'state_machine'
 gem 'sucker_punch', '~> 1.0'
 gem "sinatra", :require => "sinatra/base"
 gem "puma", '~> 2.10.1'
-gem 'leanback', '0.5.2'
+gem 'leanback', '0.5.4'
 gem "uuidtools"
 gem "thor"
 gem "ragios-client", '~> 0.1.0'
@@ -25,6 +25,6 @@ gem "activesupport", :require => "active_support/all"
 
 gem "rspec", '~> 2.5.0'
 gem "rack-test"
-gem "uptime_monitor", '~> 0.5.0'
+gem "uptime_monitor", '~> 0.6.3'
 gem "multi_json"
-gem "oj"
+gem "json"
