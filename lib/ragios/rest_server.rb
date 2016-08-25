@@ -174,7 +174,6 @@ class App < Sinatra::Base
 
   post '/maestro/test', :check => :valid_token?  do
     try_request do
-
       monitor = {
         url: params[:url],
         browser: "firefox headless",

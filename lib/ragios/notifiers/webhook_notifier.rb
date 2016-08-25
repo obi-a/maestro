@@ -6,7 +6,6 @@ module Ragios
         @monitor = monitor
         @connection = Excon.new(monitor[:webhook_url])
       end
-
       def failed(test_result)
         message = result("failed", test_result)
         post(message)
@@ -15,7 +14,6 @@ module Ragios
         message = result("resolved", test_result)
         post(message)
       end
-
       def result(event, test_result)
         {
           event: event,
