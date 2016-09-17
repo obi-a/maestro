@@ -2,6 +2,13 @@
 begin
   require 'rubygems'
   require "bundler/setup"
+
+  require "bugsnag"
+
+  Bugsnag.configure do |config|
+    config.api_key = ENV["BUGSNAG_API_KEY"]
+  end
+
   dir = Pathname(__FILE__).dirname.expand_path
   require dir + 'config'
   require dir + 'lib/ragios/rest_server'

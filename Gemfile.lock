@@ -18,6 +18,7 @@ GEM
       mime-types
       xml-simple
     buftok (0.2.0)
+    bugsnag (4.1.0)
     builder (3.2.2)
     celluloid (0.17.3)
       celluloid-essentials
@@ -172,6 +173,7 @@ PLATFORMS
 DEPENDENCIES
   activesupport
   aws-ses
+  bugsnag
   contracts
   daemons
   eventmachine (~> 1.0.4)

@@ -21,6 +21,7 @@ gem "eventmachine", '~> 1.0.4'
 gem "contracts"
 gem "excon"
 gem "activesupport", :require => "active_support/all"
+gem "bugsnag"
 
 
 gem "rspec", '~> 2.5.0'

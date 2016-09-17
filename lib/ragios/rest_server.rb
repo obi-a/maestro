@@ -1,4 +1,9 @@
 class App < Sinatra::Base
+
+  use Bugsnag::Rack
+  set :raise_errors, true
+  set :show_exceptions, false
+
   before do
     content_type('application/json')
   end
@@ -278,6 +283,7 @@ private
   def try_request
     yield
   rescue Ragios::MonitorNotFound, Ragios::EventNotFound => e
+    Bugsnag.notify(e)
     status 404
     body generate_json(error: e.message)
   rescue => e

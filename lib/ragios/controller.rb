@@ -312,6 +312,7 @@ module Ragios
       $stderr.puts exception.message
       $stderr.puts exception.backtrace.join("\n")
       $stderr.puts '-' * 80
+      Bugsnag.notify(exception)
     end
 
     def self.stop_on_error(monitor_id, monitor_options)
