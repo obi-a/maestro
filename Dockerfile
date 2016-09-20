@@ -23,5 +23,13 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /tmp/* /var/lib/apt/lists/*
 
-EXPOSE 80
-CMD ./ragios s start
+RUN apt-get update && apt-get install -y supervisor
+
+RUN mkdir -p /var/log/supervisor
+
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+RUN gem install scout_realtime
+
+EXPOSE 80 5555
+CMD ["/usr/bin/supervisord"]
