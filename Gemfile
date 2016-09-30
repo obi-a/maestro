@@ -12,7 +12,7 @@ gem 'pry'
 gem 'state_machine'
 gem 'sucker_punch', '~> 1.0'
 gem "sinatra", :require => "sinatra/base"
-gem "puma", '~> 2.10.1'
+gem "puma", '~> 3.6.0'
 gem 'leanback', '0.5.4'
 gem "uuidtools"
 gem "thor"
