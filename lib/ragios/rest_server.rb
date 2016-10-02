@@ -181,7 +181,7 @@ class App < Sinatra::Base
     try_request do
       monitor = {
         url: params[:url],
-        browser: "firefox headless",
+        browser: "phantomjs",
         exists?: params[:source_code],
         disable_screenshots: true
       }
