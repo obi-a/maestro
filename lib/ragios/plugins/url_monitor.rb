@@ -25,10 +25,10 @@ module Ragios
 
       def test_command?
         response = @connection.request(@options)
-        @test_result = { "HTTP GET Request to #{@url}" => response.status }
+        @test_result = {"url_monitor" => "success", "result" => response.status}
         return true
       rescue => e
-        @test_result = { "HTTP GET Request to #{@url}" => e.message }
+        @test_result = {"url_monitor" => "failure", "result" => e.message}
         return false
       end
     end
