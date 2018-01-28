@@ -11,7 +11,7 @@
 ## What is Maestro
 Maestro = [Ragios](https://github.com/obi-a/ragios) + [Uptime_monitor plugin](https://github.com/obi-a/uptime_monitor) + [Firefox](https://en.wikipedia.org/wiki/Firefox) + [Selenium Grid](http://www.seleniumhq.org/docs/07_selenium_grid.jsp) + [Docker Compose](https://docs.docker.com/compose/)
 
-Maestro is Ragios + Uptime_monitor plugin + firefox + Selenium Grid + Docker compose, all setup and already configured to run out of the box, dockerized and shipped in containers for easy to use Website functionality and uptime monitoring with a real web browser.
+With Maestro, all the above is setup and configured running in Docker containers for very easy Website functionality and uptime monitoring with a real web browser.
 
 ## Usage:
 
