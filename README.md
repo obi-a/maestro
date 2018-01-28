@@ -3,9 +3,8 @@
 [![Build Status](https://travis-ci.org/obi-a/maestro.svg?branch=master)](https://travis-ci.org/obi-a/maestro)
 
 * Easy web browser automation
-* Website transaction monitor
 * Monitor website functionality and uptime with a real web browser
-* Receive a screenshot when functionality does not work as expect
+* Receive a screenshot when functionality does not work as expected
 * Receive a screenshot when web page elements are not displaying in the browser
 
 ## What is Maestro
