@@ -60,7 +60,7 @@ monitor = {
   browser: "firefox"
 }
 ragios.create(monitor)
-#=> {:monitor=>"Google.com home page",
+# => {:monitor=>"Google.com home page",
 # :url=>"https://google.com",
 # :every=>"1h",
 # :contact=>"foo.bar@gmail.com",
