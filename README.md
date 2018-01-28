@@ -1,88 +1,105 @@
-# Ragios (Saint Ruby)
+#Maestro
 
-[![Build Status](https://travis-ci.org/obi-a/ragios.svg?branch=master)](https://travis-ci.org/obi-a/ragios)
+[![Build Status](https://travis-ci.org/obi-a/maestro.svg?branch=master)](https://travis-ci.org/obi-a/maestro)
 
-Ragios can be used to monitor any type of system including websites, servers, system services and web applications.
+* Easy web browser automation
+* Website transaction monitor
+* Monitor website functionality and uptime with a real web browser
 
-Sample usage to monitor a website for uptime in Ruby code:
-```ruby
-monitor = {
-  monitor: "My Website",
-  url: "http://mysite.com",
-  every: "5m",
-  contact: "admin@mail.com",
-  via: "email_notifier",
-  plugin: "uptime_monitor"
-}
+##What is Maestro
+Maestro = [Ragios](https://github.com/obi-a/ragios) + [Uptime_monitor plugin](https://github.com/obi-a/uptime_monitor) + [Firefox](https://en.wikipedia.org/wiki/Firefox) + [Xvfb](https://en.wikipedia.org/wiki/Xvfb) + [Docker](https://en.wikipedia.org/wiki/Docker_(software))
 
-ragios.create(monitor)
+Maestro is a docker image with Ragios + Uptime_monitor plugin + firefox + Xvfb, all setup and already configured to run out of the box, dockerized and shipped in a container.
+
+##Usage:
+Launch a CouchDB container
 ```
-The above example creates a monitor that monitor uses an `uptime_monitor` plugin to monitor the website `http://mysite.com` for uptime. This monitor runs tests on the website every 5 minutes, if it detects the website is down, it sends an  alert email to `admin@mail.com` via an email notifier.
+docker run -d --name couchdb -p 5984 klaemo/couchdb
+```
+Launch a Maestro container
+```
+docker run -t -i --name ragios --link couchdb:couchdb -p 5041:5041 obiora/maestro
+```
 
-## Features:
-A small and minimal extensible design:
-* Users can add, update, start, stop, restart and delete monitors that can monitor anything in simple Ruby code. [See details](http://www.whisperservers.com/ragios/ragios-saint-ruby/using-ragios/)
+Now with the Maestro container up and running, you are all set. You can now access Ragios Admin dashboard in a web browser from [http://localhost:5041](http://localhost:5041).
 
-* Includes a REST API, a web admin dashboard (Web UI) and a Ruby client rubygem that makes it easy to interact with Ragios directly with ruby code.
+##Using the Uptime Monitor
+Easiest way to start adding monitors is using the Ragios ruby client with pry or irb.
+Install the ragios-client rubygem:
+```
+gem install ragios-client
+```
+Using ragios-client to add a monitor inside irb or pry.
+```ruby
+require "ragios-client"
+ragios = Ragios::Client.new
 
-* Ragios is re-designed & re-written to be modular, memory efficient, distributed, and scalable.
+monitor = {
+  monitor: "Google.com home page",
+  url: "https://google.com",
+  every: "1h",
+  contact: "foo.bar@gmail.com",
+  via: "gmail_notifier",
+  plugin: "uptime_monitor",
+  exists?: 'title.with_text("Google")',
+  browser: "firefox headless"
+}
+ragios.create(monitor)
+#=> {:monitor=>"Google.com home page",
+# :url=>"https://google.com",
+# :every=>"1h",
+# :contact=>"foo.bar@gmail.com",
+# :via=>["gmail_notifier"],
+# :plugin=>"uptime_monitor",
+# :exists?=>"title.with_text(\"Google\")",
+# :browser=>"firefox headless",
+# :created_at_=>"2015-10-20T17:22:38Z",
+# :status_=>"active",
+# :_id=>"e774da1f-cc8c-481b-92ea-d1bd272bf1f8",
+# :type=>"monitor"}
+```
+The monitor created above uses the uptime_monitor plugin to launch the firefox web browser every hour to visit Google.com and verify that the homepage title tag text is the string "Google". The validation is defined in the key/pair *exists?: 'title.with_text("Google")'*. The important thing to note is that firefox is running inside the docker container, so it has to run as a headless browser, this is defined in the key/value pair *browser: "firefox headless"*. When using Maestro, always specify firefox as headless.
 
-* Ragios runs as a set of tiny distributed microservices, communicating with each other via ZeroMQ, and packaged with docker-compose.
+For a complete guide on using ragios-client see here: [Using Ragios](http://www.whisperservers.com/ragios/ragios-saint-ruby/using-ragios/)
 
-* Only dependency required to run Ragios is docker-compose.
+For a complete guide on using the uptime_monitor plugin see here: [Using Uptime_monitor plugin](https://github.com/obi-a/uptime_monitor/blob/master/README.md#usage)
 
-* Plugins
-  + Ragios relies on plugins to perform tests on different types of systems. The plugins are plain old ruby objects, any test/check that could be performed in ruby code could be performed by Ragios. Developers can create plugins to meet their specific needs.
-  + Ragios ships with a built-in url_monitor plugin for monitoring http(s) endpoints for uptime, developers can implement other types of plugins.
+##Building the image
+To build the Maestro Docker image:
 
-* Notifications & Notifiers
-  + Notifications are sent out when a test fails and when the test passes again.
-  + Notification messages are generated from ERB templates which developers can easily customize.
-  + Multiple email addresses could be added to a monitor, so it notfies all email addresses when a test fails or recovers from failure.
-  + Ragios relies on Notifiers to send out notifications. The notifiers are pluggable plain old ruby objects. Any type of notification that could be implemented in Ruby code can be sent by Ragios, notifications by email, SMS, Slack etc. Developers can create notifiers to meet their specific needs.
-  + Ragios ships with a built-in Amazon SES notifier that sends notifications via Amazon SES, developers can implement other types of notifiers.
-  + Multiple notifiers could be added to one monitor, so when a test fails or recovers from failure, it ssends out notifications via all the notifiers. For example a monitor could be setup to send notifications via email, SMS, Slack and twitter simultaneously.
+Git clone the Maestro Github repo:
+```
+git clone https://github.com/obi-a/maestro.git
+```
+From the Maestro root directory, build the Maestro docker image
+```
+docker build -t my-maestro .
+```
+Launch a couchDB container:
+```
+docker run -d --name couchdb -p 5984 klaemo/couchdb
+```
+Launch the Maestro image linked to the CouchDB container:
+```
+docker run -t -i --name my-maestro --link couchdb:couchdb -p 5041:5041 my-maestro
+```
 
-
-I'm doing this just for fun and educational purposes.
-
-## Documentation:
-
-
-* [Ragios (Saint Ruby)](http://www.whisperservers.com/ragios/ragios-saint-ruby/)
-
-   + [Installation](http://www.whisperservers.com/ragios/ragios-saint-ruby/installation/)
-
-   + [Start/Stop the server](http://www.whisperservers.com/ragios/running-ragios/)
-
-   + [Using Ragios](http://www.whisperservers.com/ragios/ragios-saint-ruby/using-ragios/)
-
-   + [Notifications](http://www.whisperservers.com/ragios/ragios-saint-ruby/notifications/)
-
-   + [Events](http://www.whisperservers.com/ragios/events/)
-
-   + [Services](http://www.whisperservers.com/ragios/services/)
-
-   + [Web Admin Dashboard](https://github.com/obi-a/ragios/wiki/Web-Admin-Dashboard)
-
-   + [Development Mode](http://www.whisperservers.com/ragios/development-mode/)
-
-   + [Creating Notifiers](http://www.whisperservers.com/ragios/notifiers/)
-
-   + [Creating Plugins](http://www.whisperservers.com/ragios/plugins/)
-
-   + [Authentication](http://www.whisperservers.com/ragios/authentication/)
-
-   + [REST API](http://www.whisperservers.com/ragios/ragios-rest-api/)
-
-     * [API Authentication](http://www.whisperservers.com/ragios/api-authentication/)
-
-     * [Monitors API](http://www.whisperservers.com/ragios/monitors-api/)
-
-     * [Events API](http://www.whisperservers.com/ragios/events-api/)
-
-
-## License:
-MIT License.
-
-Copyright (c) 2018 Obi Akubue, obi-akubue.org
+##Configure Ragios
+Before building the docker image you can add environment variables to the Dockerfile to configure Ragios. The Dockerfile is at the root directory of the Maestro Repo. For example to use the gmail_notifier (so that Ragios will send you notifications via gmail), add the correct environment variables to the Dockerfile and build it. The dockerfile will look like this below, look at line 4 and 5:
+```bash
+FROM cloudgear/ruby:2.2-onbuild
+ENV RAGIOS_COUCHDB_ADDRESS couchdb
+ENV RAGIOS_BIND_ADDRESS tcp://0.0.0.0:5041
+ENV GMAIL_USERNAME foo
+ENV GMAIL_PASSWORD bar
+RUN apt-get update
+RUN apt-get install -y firefox xvfb
+EXPOSE 5041
+CMD ./ragios s start
+```
+Notice the lines:
+```
+ENV GMAIL_USERNAME foo
+ENV GMAIL_PASSWORD bar
+```
+This configures the built-in gmail_notifier with the above environment variables providing the gmail username and password to Ragios. All ENV variables used to configure Ragios can be added to the image in this manner. Read more about the gmail_notifier & other notifiers and how to configure them here: [Ragios Notifications](http://www.whisperservers.com/ragios/ragios-saint-ruby/notifications/).
