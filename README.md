@@ -31,11 +31,6 @@ Open the Web UI to confirm Ragios is running fine. In your browser open http://l
 
 Maestro runs Ragios with the Uptime_monitor plugin and its dependencies already installed and configured. 
 
-For a complete guide on using ragios-client see here: [Using Ragios](http://www.whisperservers.com/ragios/ragios-saint-ruby/using-ragios/)
-
-For a complete guide on using the uptime_monitor plugin see here: [Using Uptime_monitor plugin](https://github.com/obi-a/uptime_monitor/blob/master/README.md#usage)
-
-
 ## Using the Uptime Monitor
 The easiest way to start adding monitors is using the Ragios ruby client with pry console. You can use PRY from Ragios Web Service container. 
 To access the web service container
@@ -75,6 +70,9 @@ ragios.create(monitor)
 ```
 The monitor created above uses the uptime_monitor plugin to launch the firefox web browser every hour to visit Google.com and verify that the homepage html title tag contains the text string "Google". The validation is defined in the key/pair *exists?: 'title.with_text("Google")'*.
 
+For a complete guide on using ragios-client see here: [Using Ragios](http://www.whisperservers.com/ragios/ragios-saint-ruby/using-ragios/)
+
+For a complete guide on using the uptime_monitor plugin see here: [Using Uptime_monitor plugin](https://github.com/obi-a/uptime_monitor/blob/master/README.md#usage)
 
 ## Configure Ragios & Uptime Monitor
 - See details on general Ragios configuration here [Ragios Configuration](http://www.whisperservers.com/ragios/configuration/)
