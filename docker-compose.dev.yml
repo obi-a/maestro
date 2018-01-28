@@ -7,12 +7,27 @@ services:
     ports:
       - 5984:5984
 
+  firefox:
+    image: selenium/node-firefox:3.8.1-erbium
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - hub
+    environment:
+      HUB_HOST: hub
+
+  hub:
+    image: selenium/hub:3.8.1-erbium
+    ports:
+      - "4444:4444"
+
   web:
     build: .
     links:
       - couchdb:couchdb
       - recurring_jobs:recurring_jobs
       - events:events
+      - firefox:firefox
     environment:
       RAGIOS_RECURRING_JOBS_RECEIVER_ADDRESS: recurring_jobs
       RAGIOS_EVENTS_RECEIVER_ADDRESS: events
@@ -30,6 +45,11 @@ services:
       RAGIOS_AUTH_TIMEOUT:
       COUCHDB_ADMIN_USERNAME:
       COUCHDB_ADMIN_PASSWORD:
+      S3_AWS_ACCESS_KEY_ID:
+      S3_AWS_SECRET_ACCESS_KEY:
+      RAGIOS_HERCULES_S3_DIR:
+      RAGIOS_HERCULES_ENABLE_SCREENSHOTS:
+      BROWSER: firefox
     volumes:
       - .:/usr/src/ragios
     expose:
@@ -73,6 +93,7 @@ services:
       - events:events
       - recurring_jobs:recurring_jobs
       - notifications:notifications
+      - firefox:firefox
     environment:
       RAGIOS_RECURRING_JOBS_RECEIVER_ADDRESS: recurring_jobs
       RAGIOS_EVENTS_RECEIVER_ADDRESS: events
@@ -86,6 +107,11 @@ services:
       AWS_SES_ENDPOINT:
       COUCHDB_ADMIN_USERNAME:
       COUCHDB_ADMIN_PASSWORD:
+      S3_AWS_ACCESS_KEY_ID:
+      S3_AWS_SECRET_ACCESS_KEY:
+      RAGIOS_HERCULES_S3_DIR:
+      RAGIOS_HERCULES_ENABLE_SCREENSHOTS:
+      BROWSER: firefox
     volumes:
       - .:/usr/src/ragios
     tty: true
@@ -115,6 +141,7 @@ services:
     links:
       - couchdb:couchdb
       - events:events
+      - firefox:firefox
     environment:
       RAGIOS_NOTIFICATIONS_RECEIVER_ADDRESS: '0.0.0.0'
       RAGIOS_EVENTS_RECEIVER_ADDRESS: events
@@ -126,6 +153,11 @@ services:
       AWS_SES_ENDPOINT:
       COUCHDB_ADMIN_USERNAME:
       COUCHDB_ADMIN_PASSWORD:
+      S3_AWS_ACCESS_KEY_ID:
+      S3_AWS_SECRET_ACCESS_KEY:
+      RAGIOS_HERCULES_S3_DIR:
+      RAGIOS_HERCULES_ENABLE_SCREENSHOTS:
+      BROWSER: firefox
     volumes:
       - .:/usr/src/ragios
     expose:
