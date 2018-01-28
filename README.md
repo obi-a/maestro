@@ -1,4 +1,4 @@
-#Maestro
+# Maestro
 
 [![Build Status](https://travis-ci.org/obi-a/maestro.svg?branch=master)](https://travis-ci.org/obi-a/maestro)
 
@@ -76,7 +76,7 @@ ragios.create(monitor)
 The monitor created above uses the uptime_monitor plugin to launch the firefox web browser every hour to visit Google.com and verify that the homepage html title tag contains the text string "Google". The validation is defined in the key/pair *exists?: 'title.with_text("Google")'*.
 
 
-## Configure Ragios
+## Configure Ragios & Uptime Monitor
 - See details on general Ragios configuration here [Ragios Configuration](http://www.whisperservers.com/ragios/configuration/)
 - Ragios ships with Amazon SES email notifier built-in see details on Ragios Notifications here: [Ragios Notifications](http://www.whisperservers.com/ragios/ragios-saint-ruby/notifications/)
 - To configure uptime monitor to send screenshots when it detects a problem, add the correct environment variables to docker compose, the env vars are described here: [Uptime Monitor enable Screenshots] (https://github.com/obi-a/uptime_monitor#screenshots)
