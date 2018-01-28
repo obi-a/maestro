@@ -84,5 +84,4 @@ The monitor created above uses the uptime_monitor plugin to launch the firefox w
 ## License:
 MIT License.
 
-Copyright (c) 2017 Obi Akubue, obi-akubue.org
-
+Copyright (c) 2018 Obi Akubue, obi-akubue.org
