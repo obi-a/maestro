@@ -46,9 +46,8 @@ ragios = Ragios::Client.new
 monitor = {
   monitor: "Google.com home page",
   url: "https://google.com",
-  every: "1h",
-  contact: "foo.bar@gmail.com",
-  via: "ses",
+  every: "5m",
+  via: "log_notifier",
   plugin: "uptime_monitor",
   exists?: 'title.with_text("Google")',
   browser: "firefox"
@@ -56,16 +55,15 @@ monitor = {
 ragios.create(monitor)
 # => {:monitor=>"Google.com home page",
 # :url=>"https://google.com",
-# :every=>"1h",
-# :contact=>"foo.bar@gmail.com",
-# :via=>["ses"],
+# :every=>"5m",
+# :via=>["log_notifier"],
 # :plugin=>"uptime_monitor",
 # :exists?=>"title.with_text(\"Google\")",
 # :browser=>"firefox",
-# :created_at_=>"2018-01-28 02:47:21 UTC",
+# :created_at_=>"2018-02-10 15:17:13 UTC",
 # :status_=>"active",
 # :type=>"monitor",
-# :_id=>"f80e0029-4d81-4bba-a868-cc47fcfa4a64"}
+# :_id=>"1181d969-b4f1-4ba6-9388-6f057f18cdb7"}
 ```
 The monitor created above uses the uptime_monitor plugin to launch the firefox web browser every hour to visit Google.com and verify that the homepage html title tag contains the text string "Google". The validation is defined in the key/pair *exists?: 'title.with_text("Google")'*.
 
