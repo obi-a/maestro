@@ -28,10 +28,10 @@ docker-compose up -d
 ```
 Open the Web UI to confirm Ragios is running fine. In your browser open http://localhost:5041
 
-Maestro runs Ragios with the Uptime_monitor plugin and its dependencies already installed and configured. 
+Maestro runs Ragios with the Uptime_monitor plugin and its dependencies already installed and configured.
 
 ## Using the Uptime Monitor
-The easiest way to start adding monitors is using the Ragios ruby client with pry console. You can use PRY from Ragios Web Service container. 
+The easiest way to start adding monitors is using the Ragios ruby client with pry console. You can use PRY from Ragios Web Service container.
 To access the web service container
 ```
 docker-compose exec web pry
