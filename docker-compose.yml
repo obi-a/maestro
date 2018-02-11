@@ -26,11 +26,21 @@ services:
       - hub
     environment:
       HUB_HOST: hub
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "http://localhost:5555"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
   hub:
     image: selenium/hub:3.8.1-erbium
     ports:
       - "4444:4444"
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "http://localhost:4444/grid/api/proxy"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
   web:
     image: "obiora/maestro:latest"
