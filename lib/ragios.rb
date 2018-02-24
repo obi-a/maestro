@@ -26,6 +26,7 @@ require_all '/ragios/ZMQ'
 #notifiers
 require_all '/ragios/notifiers/email'
 require_all '/ragios/notifiers'
+require_all '/ragios/maestro'
 require_all '/ragios/monitors'
 require_all '/ragios/monitors/workers'
 require_all '/ragios/database'
