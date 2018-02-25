@@ -212,7 +212,8 @@ module Ragios
           monitor = {
             url: params[:url],
             browser: "firefox",
-            exists?: params[:source_code]
+            exists?: params[:source_code],
+            disable_screenshots: true
           }
 
           generate_json( Ragios::Maestro::Api.test(monitor) )
