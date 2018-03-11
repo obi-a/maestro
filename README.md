@@ -8,9 +8,9 @@
 * Receive a screenshot when web page elements are not displaying in the browser
 
 ## What is Maestro
-Maestro = [Ragios](https://github.com/obi-a/ragios) + [Uptime_monitor plugin](https://github.com/obi-a/uptime_monitor) + [Firefox](https://en.wikipedia.org/wiki/Firefox) + [Selenium Grid](http://www.seleniumhq.org/docs/07_selenium_grid.jsp) + [Docker Compose](https://docs.docker.com/compose/)
+Maestro = [Ragios](https://github.com/obi-a/ragios) + [Uptime_monitor plugin](https://github.com/obi-a/uptime_monitor) + [Firefox](https://en.wikipedia.org/wiki/Firefox)/[Chrome](https://en.wikipedia.org/wiki/Chrome) + [Selenium Grid](http://www.seleniumhq.org/docs/07_selenium_grid.jsp) + [Docker Compose](https://docs.docker.com/compose/)
 
-With Maestro, all the above is setup and configured running in Docker containers for very easy Website functionality and uptime monitoring with a real web browser.
+With Maestro, all the above is setup and configured running in Docker containers for very easy Website functionality and uptime monitoring with a real web browser (Chrome or Firefox).
 
 ## Usage:
 
