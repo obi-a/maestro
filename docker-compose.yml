@@ -36,10 +36,19 @@ services:
       timeout: 5s
       retries: 3
 
+  chrome:
+    image: selenium/node-chrome:3.8.1-erbium
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - hub
+    environment:
+      HUB_HOST: hub
+
   hub:
     image: selenium/hub:3.8.1-erbium
-    ports:
-      - "4444:4444"
+    environment:
+      GRID_BROWSER_TIMEOUT: 60
     healthcheck:
       test: ["CMD", "wget", "--spider", "http://localhost:4444/grid/api/proxy"]
       interval: 10s
@@ -50,11 +59,13 @@ services:
     image: "obiora/maestro:latest"
     depends_on:
       - database_setup
+      - firefox
+      - chrome
     links:
       - couchdb:couchdb
       - recurring_jobs:recurring_jobs
       - events:events
-      - firefox:firefox
+      - hub:hub
     environment:
       RAGIOS_RECURRING_JOBS_RECEIVER_ADDRESS: recurring_jobs
       RAGIOS_EVENTS_RECEIVER_ADDRESS: events
@@ -76,7 +87,8 @@ services:
       S3_AWS_SECRET_ACCESS_KEY:
       RAGIOS_HERCULES_S3_DIR:
       RAGIOS_HERCULES_ENABLE_SCREENSHOTS:
-      BROWSER: firefox
+      HUB_HOST: hub
+      HUB_PORT: 4444
     expose:
       - "5041"
     ports:
@@ -115,12 +127,14 @@ services:
     image: "obiora/maestro:latest"
     depends_on:
       - database_setup
+      - firefox
+      - chrome
     links:
       - couchdb:couchdb
       - events:events
       - recurring_jobs:recurring_jobs
       - notifications:notifications
-      - firefox:firefox
+      - hub:hub
     environment:
       RAGIOS_RECURRING_JOBS_RECEIVER_ADDRESS: recurring_jobs
       RAGIOS_EVENTS_RECEIVER_ADDRESS: events
@@ -138,7 +152,8 @@ services:
       S3_AWS_SECRET_ACCESS_KEY:
       RAGIOS_HERCULES_S3_DIR:
       RAGIOS_HERCULES_ENABLE_SCREENSHOTS:
-      BROWSER: firefox
+      HUB_HOST: hub
+      HUB_PORT: 4444
     tty: true
     stdin_open: true
     entrypoint: bundle exec ruby bin/workers_ctl.rb run
@@ -165,10 +180,12 @@ services:
     image: "obiora/maestro:latest"
     depends_on:
       - database_setup
+      - firefox
+      - chrome
     links:
       - couchdb:couchdb
       - events:events
-      - firefox:firefox
+      - hub:hub
     environment:
       RAGIOS_NOTIFICATIONS_RECEIVER_ADDRESS: '0.0.0.0'
       RAGIOS_EVENTS_RECEIVER_ADDRESS: events
@@ -184,7 +201,8 @@ services:
       S3_AWS_SECRET_ACCESS_KEY:
       RAGIOS_HERCULES_S3_DIR:
       RAGIOS_HERCULES_ENABLE_SCREENSHOTS:
-      BROWSER: firefox
+      HUB_HOST: hub
+      HUB_PORT: 4444
     expose:
       - "5044"
     tty: true
