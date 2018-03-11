@@ -5,7 +5,7 @@ gem 'state_machine'
 gem 'leanback', '~> 0.5.14'
 gem 'contracts'
 gem 'celluloid-zmq', '~> 0.17.2'
-gem 'uptime_monitor', '~> 0.7.1'
+gem 'uptime_monitor', '~> 0.7.2'
 
 gem 'daemons', :group => [:services]
 gem 'rake', :group => [:development, :test]

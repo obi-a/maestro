@@ -16,18 +16,34 @@ services:
     environment:
       HUB_HOST: hub
 
+  chrome:
+    image: selenium/node-chrome:3.8.1-erbium
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - hub
+    environment:
+      HUB_HOST: hub
+
   hub:
     image: selenium/hub:3.8.1-erbium
+    ports:
+      - "4444:4444"
+    environment:
+      GRID_BROWSER_TIMEOUT: 60
     ports:
       - "4444:4444"
 
   web:
     build: .
+    depends_on:
+      - firefox
+      - chrome
     links:
       - couchdb:couchdb
       - recurring_jobs:recurring_jobs
       - events:events
-      - firefox:firefox
+      - hub:hub
     environment:
       RAGIOS_RECURRING_JOBS_RECEIVER_ADDRESS: recurring_jobs
       RAGIOS_EVENTS_RECEIVER_ADDRESS: events
@@ -49,7 +65,8 @@ services:
       S3_AWS_SECRET_ACCESS_KEY:
       RAGIOS_HERCULES_S3_DIR:
       RAGIOS_HERCULES_ENABLE_SCREENSHOTS:
-      BROWSER: firefox
+      HUB_HOST: hub
+      HUB_PORT: 4444
     volumes:
       - .:/usr/src/ragios
     expose:
@@ -88,12 +105,15 @@ services:
 
   workers:
     build: .
+    depends_on:
+      - firefox
+      - chrome
     links:
       - couchdb:couchdb
       - events:events
       - recurring_jobs:recurring_jobs
       - notifications:notifications
-      - firefox:firefox
+      - hub:hub
     environment:
       RAGIOS_RECURRING_JOBS_RECEIVER_ADDRESS: recurring_jobs
       RAGIOS_EVENTS_RECEIVER_ADDRESS: events
@@ -111,7 +131,8 @@ services:
       S3_AWS_SECRET_ACCESS_KEY:
       RAGIOS_HERCULES_S3_DIR:
       RAGIOS_HERCULES_ENABLE_SCREENSHOTS:
-      BROWSER: firefox
+      HUB_HOST: hub
+      HUB_PORT: 4444
     volumes:
       - .:/usr/src/ragios
     tty: true
@@ -138,10 +159,13 @@ services:
 
   notifications:
     build: .
+    depends_on:
+      - firefox
+      - chrome
     links:
       - couchdb:couchdb
       - events:events
-      - firefox:firefox
+      - hub:hub
     environment:
       RAGIOS_NOTIFICATIONS_RECEIVER_ADDRESS: '0.0.0.0'
       RAGIOS_EVENTS_RECEIVER_ADDRESS: events
@@ -157,7 +181,8 @@ services:
       S3_AWS_SECRET_ACCESS_KEY:
       RAGIOS_HERCULES_S3_DIR:
       RAGIOS_HERCULES_ENABLE_SCREENSHOTS:
-      BROWSER: firefox
+      HUB_HOST: hub
+      HUB_PORT: 4444
     volumes:
       - .:/usr/src/ragios
     expose:
