@@ -1,3 +1,13 @@
+GIT
+  remote: https://github.com/obi-a/uptime_monitor.git
+  revision: 939b04321f3fed33a495219bfa1b828ac94fbef4
+  specs:
+    uptime_monitor (0.7.8)
+      aws-s3
+      treetop
+      watir (~> 6.14.0)
+      watir-webdriver-performance (~> 0.2.4)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -112,12 +122,12 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.6.0)
     rspec-support (3.6.0)
-    rubyzip (1.2.1)
+    rubyzip (1.2.2)
     rufus-scheduler (3.4.2)
       et-orbi (~> 1.0)
-    selenium-webdriver (3.10.0)
+    selenium-webdriver (3.14.1)
       childprocess (~> 0.5)
-      rubyzip (~> 1.2)
+      rubyzip (~> 1.2, >= 1.2.2)
     sinatra (2.0.4)
       mustermann (~> 1.0)
       rack (~> 2.0)
@@ -133,7 +143,7 @@ GEM
     tilt (2.0.8)
     timers (4.1.2)
       hitimes
-    treetop (1.6.9)
+    treetop (1.6.10)
       polyglot (~> 0.3)
     tzinfo (1.2.4)
       thread_safe (~> 0.1)
@@ -141,12 +151,7 @@ GEM
       unf_ext
     unf (0.1.4-java)
     unf_ext (0.0.7.5)
-    uptime_monitor (0.7.2)
-      aws-s3
-      treetop
-      watir
-      watir-webdriver-performance (~> 0.2.4)
-    watir (6.10.3)
+    watir (6.14.0)
       selenium-webdriver (~> 3.4, >= 3.4.1)
     watir-webdriver (0.9.9)
       selenium-webdriver (>= 2.46.2)
@@ -178,7 +183,7 @@ DEPENDENCIES
   rufus-scheduler (~> 3.4.2)
   sinatra (~> 2.0.2)
   state_machine
-  uptime_monitor (~> 0.7.2)
+  uptime_monitor!
 
 BUNDLED WITH
    1.16.1
