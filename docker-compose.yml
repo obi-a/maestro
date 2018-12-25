@@ -8,11 +8,7 @@ services:
       - 5984:5984
 
   database_setup:
-<<<<<<< HEAD
-    image: "obiora/ragios:v0.7.1.2"
-=======
-    image: "obiora/maestro:latest"
->>>>>>> use correct image
+    image: "obiora/maestro:v0.2.0"
     links:
       - couchdb:couchdb
     environment:
@@ -56,7 +52,7 @@ services:
       retries: 3
 
   web:
-    image: "obiora/maestro:latest"
+    image: "obiora/maestro:v0.2.0"
     depends_on:
       - database_setup
       - firefox
@@ -98,7 +94,7 @@ services:
     entrypoint: bundle exec pumactl -F server.rb start
 
   recurring_jobs:
-    image: "obiora/maestro:latest"
+    image: "obiora/maestro:v0.2.0"
     depends_on:
       - database_setup
     links:
@@ -124,7 +120,7 @@ services:
     entrypoint: bundle exec ruby bin/recurring_jobs_ctl.rb run
 
   workers:
-    image: "obiora/maestro:latest"
+    image: "obiora/maestro:v0.2.0"
     depends_on:
       - database_setup
       - firefox
@@ -159,7 +155,7 @@ services:
     entrypoint: bundle exec ruby bin/workers_ctl.rb run
 
   events:
-    image: "obiora/maestro:latest"
+    image: "obiora/maestro:v0.2.0"
     depends_on:
       - database_setup
     links:
@@ -177,7 +173,7 @@ services:
     entrypoint: bundle exec ruby bin/events_ctl.rb run
 
   notifications:
-    image: "obiora/maestro:latest"
+    image: "obiora/maestro:v0.2.0"
     depends_on:
       - database_setup
       - firefox
