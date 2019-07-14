@@ -38,6 +38,26 @@ spec:
           value: info
         - name: RAGIOS_NOTIFICATIONS_RECEIVER_ADDRESS
           value: 0.0.0.0
+        - name: SES_AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: ses-aws-secret
+              key: ses_aws_access_key_id
+        - name: SES_AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: ses-aws-secret
+              key: ses_aws_secret_access_key
+        - name: AWS_SES_SEND_FROM
+          valueFrom:
+            configMapKeyRef:
+              name: ses-aws-config
+              key: aws_ses_send_from
+        - name: AWS_SES_ENDPOINT
+          valueFrom:
+            configMapKeyRef:
+              name: ses-aws-config
+              key: aws_ses_endpoint
         - name: COUCHDB_ADMIN_USERNAME
           valueFrom:
             secretKeyRef:

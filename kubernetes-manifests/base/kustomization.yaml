@@ -8,6 +8,4 @@ resources:
 - database-setup.yaml
 - hub-deployment.yaml
 - firefox-deployment.yaml
-- firefox-claim0-persistentvolumeclaim.yaml
 - chrome-deployment.yaml
-- chrome-claim0-persistentvolumeclaim.yaml

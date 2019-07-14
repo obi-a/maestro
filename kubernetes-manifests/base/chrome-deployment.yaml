@@ -10,7 +10,7 @@ metadata:
   name: chrome
   namespace: ragios
 spec:
-  replicas: 1
+  replicas: 3
   strategy:
     type: Recreate
   template:
@@ -21,17 +21,8 @@ spec:
     spec:
       containers:
       - env:
-        - name: HUB_HOST
-          value: hub
         image: selenium/node-chrome:3.8.1-erbium
         name: chrome
         resources: {}
-        volumeMounts:
-        - mountPath: /dev/shm
-          name: chrome-claim0
       restartPolicy: Always
-      volumes:
-      - name: chrome-claim0
-        persistentVolumeClaim:
-          claimName: chrome-claim0
 status: {}

@@ -50,6 +50,26 @@ spec:
           value: production
         - name: RAGIOS_AUTHENTICATION
           value: 'true'
+        - name: SES_AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: ses-aws-secret
+              key: ses_aws_access_key_id
+        - name: SES_AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: ses-aws-secret
+              key: ses_aws_secret_access_key
+        - name: AWS_SES_SEND_FROM
+          valueFrom:
+            configMapKeyRef:
+              name: ses-aws-config
+              key: aws_ses_send_from
+        - name: AWS_SES_ENDPOINT
+          valueFrom:
+            configMapKeyRef:
+              name: ses-aws-config
+              key: aws_ses_endpoint
         - name: RAGIOS_ADMIN_USERNAME
           valueFrom:
             secretKeyRef:

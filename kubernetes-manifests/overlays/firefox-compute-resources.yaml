@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: firefox
+  namespace: ragios
+spec:
+  template:
+    spec:
+      containers:
+      - resources:
+          limits:
+            memory: 600Mi
+            cpu: 1000m
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        name: firefox

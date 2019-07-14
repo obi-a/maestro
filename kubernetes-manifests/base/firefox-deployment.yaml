@@ -10,7 +10,7 @@ metadata:
   name: firefox
   namespace: ragios
 spec:
-  replicas: 1
+  replicas: 3
   strategy:
     type: Recreate
   template:
@@ -21,8 +21,6 @@ spec:
     spec:
       containers:
       - env:
-        - name: HUB_HOST
-          value: hub
         image: selenium/node-firefox:3.8.1-erbium
         livenessProbe:
           exec:
@@ -35,12 +33,5 @@ spec:
           timeoutSeconds: 5
         name: firefox
         resources: {}
-        volumeMounts:
-        - mountPath: /dev/shm
-          name: firefox-claim0
       restartPolicy: Always
-      volumes:
-      - name: firefox-claim0
-        persistentVolumeClaim:
-          claimName: firefox-claim0
 status: {}
