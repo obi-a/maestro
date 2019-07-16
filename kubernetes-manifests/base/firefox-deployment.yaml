@@ -10,7 +10,7 @@ metadata:
   name: firefox
   namespace: ragios
 spec:
-  replicas: 3
+  replicas: 1
   strategy:
     type: Recreate
   template:

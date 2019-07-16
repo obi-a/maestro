@@ -2,4 +2,4 @@ bases:
 - ../base
 patches:
 - compute-resources.yaml
-- firefox-compute-resources.yaml
+- chrome-compute-resources.yaml

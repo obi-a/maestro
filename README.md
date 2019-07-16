@@ -8,11 +8,13 @@
 * Receive a screenshot when web page elements are not displaying in the browser
 
 ## What is Maestro
-Maestro = [Ragios](https://github.com/obi-a/ragios) + [Uptime_monitor plugin](https://github.com/obi-a/uptime_monitor) + [Firefox](https://en.wikipedia.org/wiki/Firefox)/[Chrome](https://en.wikipedia.org/wiki/Chrome) + [Selenium Grid](http://www.seleniumhq.org/docs/07_selenium_grid.jsp) + [Docker Compose](https://docs.docker.com/compose/)
+Maestro = [Ragios](https://github.com/obi-a/ragios) + [Uptime_monitor plugin](https://github.com/obi-a/uptime_monitor) + [Firefox](https://en.wikipedia.org/wiki/Firefox)/[Chrome](https://en.wikipedia.org/wiki/Chrome) + [Selenium Grid](http://www.seleniumhq.org/docs/07_selenium_grid.jsp) + [Kubernetes](https://kubernetes.io/)
 
-With Maestro, all the above is setup and configured running in Docker containers for very easy Website functionality and uptime monitoring with a real web browser (Chrome or Firefox).
+With Maestro, all the above is setup and configured running in Docker containers for very easy Website functionality/uptime monitoring with a real web browser (Chrome or Firefox).
 
-## Usage:
+## Local Usage:
+
+You can run Maestro locally with Docker Compose, on a server you can run Maestro on Kubernetes Cluster, see details here https://github.com/obi-a/maestro#usage-on-a-kubernetes-cluster
 
 Clone the Maestro Repo:
 ```
@@ -26,7 +28,7 @@ Start Ragios with Docker-compose
 ```
 docker-compose up -d
 ```
-Open the Web UI to confirm Ragios is running fine. In your browser open http://localhost:5041
+Open the Web UI to confirm Ragios is running fine. In your browser open http://localhost:5041.
 
 Maestro runs Ragios with the Uptime_monitor plugin and its dependencies already installed and configured.
 
@@ -76,7 +78,47 @@ For a complete guide on using the uptime_monitor plugin see here: [Using Uptime_
 - Ragios ships with Amazon SES email notifier built-in see details on Ragios Notifications here: [Ragios Notifications](http://www.whisperservers.com/ragios/ragios-saint-ruby/notifications/)
 - To configure uptime monitor to send screenshots when it detects a problem, add the correct environment variables to docker compose, the env vars are described here: [Uptime Monitor enable Screenshots] (https://github.com/obi-a/uptime_monitor#screenshots)
 
+## Usage on a Kubernetes Cluster
+
+Create a namespace for Ragios in your cluster
+```
+kubectl apply -f kubernetes-manifests/ragios-namespace.yaml
+```
+For receiving email notifications from Ragios using Amazon SES add AWS SES credentials as a kubernetes secret using the command below, insert the AWS crendentials of your AWS account with SES permissions, for more details see [Ragios Notifications] (http://www.whisperservers.com/ragios/ragios-saint-ruby/notifications/)
+```
+kubectl create secret generic ses-aws-secret \
+  --from-literal=ses_aws_access_key_id='<INSERT SES_AWS_ACCESS_KEY_ID>' \
+  --from-literal=ses_aws_secret_access_key='<INSERT S3_AWS_SECRET_ACCESS_KEY>' \
+  --namespace='ragios'
+```
+
+Add a kubernetes configmap with for SES config details. Replace the command below with the config details. See [Ragios Notifications] (http://www.whisperservers.com/ragios/ragios-saint-ruby/notifications/) for details
+```
+kubectl create configmap ses-aws-config \
+  --from-literal=aws_ses_send_from='<INSERT AWS_SES_SEND_FROM>' \
+  --from-literal=aws_ses_endpoint='<INSERT AWS_SES_ENDPOINT>' \
+  --namespace='ragios'
+```
+
+Optionally, to use uptime_monitor screenshots feature, add a Kubernetes secret for S3 credentials and a configmap for uptime_monitor screenshots configuration. See more details on uptime_monitor screenshots here [Uptime Monitor enable Screenshots] (https://github.com/obi-a/uptime_monitor#screenshots). Insert the appropriate credentials or config data in the command below:
+```
+kubectl create secret generic s3-aws-secret \
+  --from-literal=s3_aws_access_key_id='<INSERT S3_AWS_ACCESS_KEY_ID>' \
+  --from-literal=s3_aws_secret_access_key='<INSERT S3_AWS_SECRET_ACCESS_KEY>' \
+  --namespace='ragios'
+
+kubectl create configmap s3-aws-config \
+  --from-literal=ragios_hercules_s3_dir='<RAGIOS_HERCULES_S3_DIR>' \
+  --from-literal=ragios_hercules_enable_screenshots='true' \
+  --namespace='ragios'
+
+```
+
+Follow the remaining steps from here https://github.com/obi-a/ragios/wiki/Run-Ragios-on-a-Kubernetes-Cluster#add-ragios-and-couchdb-credentials to complete the process and run Maestro on your Kubernetes Cluster (Note that the Maestro repo runs a customized Ragios version, so it is a very identical process as running Ragios on a Kubernetes Cluster).
+
+
+
 ## License:
 MIT License.
 
-Copyright (c) 2018 Obi Akubue, obi-akubue.org
+Copyright (c) 2019 Obi Akubue, obi-akubue.org

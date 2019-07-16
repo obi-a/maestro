@@ -7,5 +7,4 @@ resources:
 - workers-deployment.yaml
 - database-setup.yaml
 - hub-deployment.yaml
-- firefox-deployment.yaml
 - chrome-deployment.yaml
