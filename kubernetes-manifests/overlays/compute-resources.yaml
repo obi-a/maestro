@@ -10,9 +10,9 @@ spec:
       - resources:
           limits:
             memory: 512Mi
-            cpu: 1000m
-          requests:
             cpu: 100m
+          requests:
+            cpu: 10m
             memory: 200Mi
         name: web
 ---
@@ -27,9 +27,9 @@ spec:
       containers:
       - resources:
           limits:
-            memory: 1Gi
-            cpu: 1000m
-          requests:
+            memory: 512Mi
             cpu: 100m
+          requests:
+            cpu: 10m
             memory: 200Mi
         name: workers

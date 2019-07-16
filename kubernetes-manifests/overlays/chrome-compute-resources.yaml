@@ -10,8 +10,8 @@ spec:
       - resources:
           limits:
             memory: 600Mi
-            cpu: 1000m
-          requests:
             cpu: 100m
+          requests:
+            cpu: 50m
             memory: 200Mi
         name: chrome
