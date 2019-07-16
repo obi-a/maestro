@@ -14,7 +14,7 @@ With Maestro, all the above is setup and configured running in Docker containers
 
 ## Local Usage:
 
-You can run Maestro locally with Docker Compose, on a server you can run Maestro on Kubernetes Cluster, see details here https://github.com/obi-a/maestro#usage-on-a-kubernetes-cluster
+You can run Maestro locally with Docker Compose for development and testing, for production it is recommended to run Maestro on Kubernetes Cluster, see details here [Usage on a Kubernetes Cluster](https://github.com/obi-a/maestro#usage-on-a-kubernetes-cluster)
 
 Clone the Maestro Repo:
 ```
@@ -76,7 +76,7 @@ For a complete guide on using the uptime_monitor plugin see here: [Using Uptime_
 ## Configure Ragios & Uptime Monitor
 - See details on general Ragios configuration here [Ragios Configuration](http://www.whisperservers.com/ragios/configuration/)
 - Ragios ships with Amazon SES email notifier built-in see details on Ragios Notifications here: [Ragios Notifications](http://www.whisperservers.com/ragios/ragios-saint-ruby/notifications/)
-- To configure uptime monitor to send screenshots when it detects a problem, add the correct environment variables to docker compose, the env vars are described here: [Uptime Monitor enable Screenshots] (https://github.com/obi-a/uptime_monitor#screenshots)
+- To configure uptime monitor to send screenshots when it detects a problem, add the correct environment variables to docker compose, the env vars are described here: [Uptime Monitor enable Screenshots](https://github.com/obi-a/uptime_monitor#screenshots)
 
 ## Usage on a Kubernetes Cluster
 
@@ -84,7 +84,7 @@ Create a namespace for Ragios in your cluster
 ```
 kubectl apply -f kubernetes-manifests/ragios-namespace.yaml
 ```
-For receiving email notifications from Ragios using Amazon SES add AWS SES credentials as a kubernetes secret using the command below, insert the AWS crendentials of your AWS account with SES permissions, for more details see [Ragios Notifications] (http://www.whisperservers.com/ragios/ragios-saint-ruby/notifications/)
+For receiving email notifications from Ragios using Amazon SES add AWS SES credentials as a kubernetes secret using the command below, insert the AWS crendentials of your AWS account with SES permissions, for more details see [Ragios Notifications](http://www.whisperservers.com/ragios/ragios-saint-ruby/notifications/)
 ```
 kubectl create secret generic ses-aws-secret \
   --from-literal=ses_aws_access_key_id='<INSERT SES_AWS_ACCESS_KEY_ID>' \
@@ -92,7 +92,7 @@ kubectl create secret generic ses-aws-secret \
   --namespace='ragios'
 ```
 
-Add a kubernetes configmap with for SES config details. Replace the command below with the config details. See [Ragios Notifications] (http://www.whisperservers.com/ragios/ragios-saint-ruby/notifications/) for details
+Add a kubernetes configmap with for SES config details. Replace the command below with the config details. See [Ragios Notifications](http://www.whisperservers.com/ragios/ragios-saint-ruby/notifications/) for details
 ```
 kubectl create configmap ses-aws-config \
   --from-literal=aws_ses_send_from='<INSERT AWS_SES_SEND_FROM>' \
@@ -100,7 +100,7 @@ kubectl create configmap ses-aws-config \
   --namespace='ragios'
 ```
 
-Optionally, to use uptime_monitor screenshots feature, add a Kubernetes secret for S3 credentials and a configmap for uptime_monitor screenshots configuration. See more details on uptime_monitor screenshots here [Uptime Monitor enable Screenshots] (https://github.com/obi-a/uptime_monitor#screenshots). Insert the appropriate credentials or config data in the command below:
+Optionally, to use uptime_monitor screenshots feature, add a Kubernetes secret for S3 credentials and a configmap for uptime_monitor screenshots configuration. See more details on uptime_monitor screenshots here [Uptime Monitor enable Screenshots](https://github.com/obi-a/uptime_monitor#screenshots). Insert the appropriate credentials or config data in the command below:
 ```
 kubectl create secret generic s3-aws-secret \
   --from-literal=s3_aws_access_key_id='<INSERT S3_AWS_ACCESS_KEY_ID>' \
