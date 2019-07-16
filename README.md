@@ -14,7 +14,7 @@ With Maestro, all the above is setup and configured running in Docker containers
 
 ## Local Usage:
 
-You can run Maestro locally with Docker Compose for development and testing, for production it is recommended to run Maestro on Kubernetes Cluster, see details here [Usage on a Kubernetes Cluster](https://github.com/obi-a/maestro#usage-on-a-kubernetes-cluster)
+You can run Maestro locally with Docker Compose for development and testing, for production it is recommended to run Maestro on a Kubernetes Cluster, see details here [Usage on a Kubernetes Cluster](https://github.com/obi-a/maestro#usage-on-a-kubernetes-cluster). See below for running Maestro locally with Docker Compose.
 
 Clone the Maestro Repo:
 ```
