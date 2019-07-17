@@ -10,9 +10,7 @@ spec:
       - resources:
           limits:
             memory: 512Mi
-            cpu: 100m
           requests:
-            cpu: 10m
             memory: 200Mi
         name: web
 ---
@@ -28,8 +26,6 @@ spec:
       - resources:
           limits:
             memory: 512Mi
-            cpu: 100m
           requests:
-            cpu: 10m
             memory: 200Mi
         name: workers
