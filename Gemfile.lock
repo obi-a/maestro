@@ -43,7 +43,7 @@ GEM
       unf (>= 0.0.5, < 1.0.0)
     et-orbi (1.0.8)
       tzinfo
-    excon (0.45.4)
+    excon (0.71.0)
     ffi (1.9.25)
     ffi (1.9.25-java)
     ffi-rzmq (2.0.5)
